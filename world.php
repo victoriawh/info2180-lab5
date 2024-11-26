@@ -17,14 +17,23 @@ try{
 	}
 
 	$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	echo '<table border = "1">';
+	echo '<thead><tr><th>Country Name</th><th>Continent</th><th>Independence Year</th><th>Head of State</th></tr><thead>';
+	echo '<tbody>';
+	foreach($results as $row){
+		echo '<tr>';
+		echo '<td>'.htmlspecialchars($row['name']).'</td>';
+		echo '<td>'.htmlspecialchars($row['continent']).'</td>';
+		echo '<td>'.htmlspecialchars($row['independence_year']).'</td>';
+		echo '<td>'.htmlspecialchars($row['head_of_state']).'</td>';
+		echo '</tr>';
+	}
+	echo '</tbody>';
+	echo '</table>';
 }catch (PDOException $e){
 	echo "Connection failed: " . $e -> getMessage();
 	exit;
 }
 
 ?>
-<ul>
-<?php foreach ($results as $row): ?>
-  <li><?= $row['name'] . ' is ruled by ' . $row['head_of_state']; ?></li>
-<?php endforeach; ?>
-</ul>
+
